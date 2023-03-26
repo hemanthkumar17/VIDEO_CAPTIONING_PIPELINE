@@ -86,3 +86,37 @@ def generate_frames(video_file,saving_frames_durations,videos_list):
         # increment the frame count
         count += 1
     videos_list[filename]=image_list
+
+def get_similar_frames(videos_features_vectors,videos_list):
+  result={}
+  for key,value in videos_features_vectors.items():
+    allVectors=value
+    image_list=videos_list[key]
+
+    img1 = allVectors[image_list[0]]
+
+    similar_images = defaultdict(lambda: [])
+    similar_images[1].append(image_list[0])
+    similar_count = 1
+
+    for i in range(1, len(image_list)):
+      img2 = allVectors[image_list[i]]
+
+      similarity = -1 * (spatial.distance.cosine(img1, img2) - 1)
+
+      if(similarity >= 0.8):
+        similar_images[similar_count].append(image_list[i])
+      else:
+        img1 = img2
+        similar_count = similar_count + 1
+        similar_images[similar_count].append(image_list[i])
+    result[key]=similar_images
+
+def get_final_frames(results):
+  final_frames={}
+  for key, value in results.items():
+    video_frame={}
+    similar_images=value
+    video_frame={k:random.choice(v) for k,v in similar_images.items()}
+    final_frames[key]=video_frame
+  return final_frames
