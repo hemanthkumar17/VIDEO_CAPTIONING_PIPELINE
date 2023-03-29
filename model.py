@@ -1,7 +1,7 @@
 import torch
 from tqdm import tqdm
 from torchvision import models
-
+import torchvision.transforms as transforms
 # for this prototype we use no gpu, cuda= False and as model resnet18 to obtain feature vectors
 
 class Img2VecResnet18():

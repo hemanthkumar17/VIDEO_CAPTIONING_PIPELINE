@@ -3,6 +3,9 @@ import cv2
 import numpy as np
 import os
 import json
+from scipy import spatial
+from collections import defaultdict
+import random
 def format_timedelta(td):
     """Utility function to format timedelta objects in a cool way (e.g 00:00:20.05) 
     omitting microseconds and retaining milliseconds"""
@@ -47,6 +50,7 @@ def get_saving_frames_durations(saving_fps,json_file):
 
 def generate_frames(video_file,saving_frames_durations,videos_list):
     filename, _ = os.path.splitext(video_file)
+    name_file=filename
     filename += "-opencv"
     image_list=[]
     # make a folder by the name of the video file
@@ -85,7 +89,7 @@ def generate_frames(video_file,saving_frames_durations,videos_list):
                 pass
         # increment the frame count
         count += 1
-    videos_list[filename]=image_list
+    videos_list[name_file[9:]]=image_list
 
 def get_similar_frames(videos_features_vectors,videos_list):
   result={}
@@ -111,6 +115,8 @@ def get_similar_frames(videos_features_vectors,videos_list):
         similar_count = similar_count + 1
         similar_images[similar_count].append(image_list[i])
     result[key]=similar_images
+
+  return result
 
 def get_final_frames(results):
   final_frames={}
