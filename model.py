@@ -3,11 +3,11 @@ from tqdm import tqdm
 from torchvision import models
 import torchvision.transforms as transforms
 # for this prototype we use no gpu, cuda= False and as model resnet18 to obtain feature vectors
-
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 class Img2VecResnet18():
     def __init__(self):
         
-        self.device = torch.device("cpu")
+        self.device = torch.device(device)
         self.numberFeatures = 512
         self.modelName = "resnet-18"
         self.model, self.featureLayer = self.getFeatureLayer()

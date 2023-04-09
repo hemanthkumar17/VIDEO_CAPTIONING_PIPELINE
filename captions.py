@@ -1,10 +1,11 @@
 import requests
 from PIL import Image
+import torch
 from transformers import BlipProcessor, BlipForConditionalGeneration
-
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 def get_model():
   processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
-  model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base").to("cuda")
+  model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base").to(device)
   return processor, model
 
 def image_caption(processor, model, image_folder,image_path):
