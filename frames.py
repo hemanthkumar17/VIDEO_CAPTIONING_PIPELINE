@@ -89,7 +89,7 @@ def generate_frames(video_file,saving_frames_durations,videos_list):
                 pass
         # increment the frame count
         count += 1
-    videos_list[name_file[9:]]=image_list
+    videos_list[name_file]=image_list
 
 def get_similar_frames(videos_features_vectors,videos_list):
   result={}

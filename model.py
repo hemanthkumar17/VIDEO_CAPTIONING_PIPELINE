@@ -1,17 +1,17 @@
 import torch
 from tqdm import tqdm
 from torchvision import models
+import torch.nn as nn
 import torchvision.transforms as transforms
 # for this prototype we use no gpu, cuda= False and as model resnet18 to obtain feature vectors
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-class Img2VecResnet18():
-    def __init__(self):
-        
-        self.device = torch.device(device)
+class Img2VecResnet18(nn.Module):
+    def __init__(self,device):
+        super(Img2VecResnet18, self).__init__()
+        self.device=device
         self.numberFeatures = 512
         self.modelName = "resnet-18"
-        self.model, self.featureLayer = self.getFeatureLayer()
-        self.model = self.model.to(self.device)
+        self.model,self.featureLayer = self.__getFeatureLayer()
+        self.model = self.model.to(device)
         self.model.eval()
         self.toTensor = transforms.ToTensor()
         
@@ -31,7 +31,7 @@ class Img2VecResnet18():
 
         return embedding.numpy()[0, :, 0, 0]
 
-    def getFeatureLayer(self):
+    def __getFeatureLayer(self):
         
         cnnModel = models.resnet18(pretrained=True)
         layer = cnnModel._modules.get('avgpool')

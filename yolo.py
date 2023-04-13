@@ -4,6 +4,8 @@ from matplotlib.pyplot import imshow
 from PIL import Image,ImageDraw
 import requests
 import os
+import cv2
+import numpy as np
 image_processor = AutoImageProcessor.from_pretrained("hustvl/yolos-tiny")
 model = AutoModelForObjectDetection.from_pretrained("hustvl/yolos-tiny")
 
@@ -11,7 +13,7 @@ def yolo_box(image_folder,img_path):
   # url = "http://images.cocodataset.org/val2017/000000039769.jpg"
   # image = Image.open(requests.get(url, stream=True).raw)
   # print(image_path)
-  image=Image.open("/content/"+image_folder+"-opencv/"+ img_path)
+  image=Image.open(image_folder+"-opencv/"+ img_path)
   # imshow(np.asarray(image))
   
   inputs = image_processor(images=image, return_tensors="pt")
@@ -40,4 +42,4 @@ def yolo_box(image_folder,img_path):
       #     f"{round(score.item(), 3)} at location {box}"
       # )
 
-  cv2.imwrite(os.path.join(f'/content/{image_folder}-opencv', f"{img_path}"), np.asarray(image,dtype=np.float32))  
+  cv2.imwrite(os.path.join(f'{image_folder}-opencv', f"{img_path}"), np.asarray(image,dtype=np.float32))  
