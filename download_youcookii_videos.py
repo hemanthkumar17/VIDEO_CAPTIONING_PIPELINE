@@ -5,9 +5,9 @@
 # Requirement: install youtube-dl (https://github.com/rg3/youtube-dl/)
 
 import os
-
-dataset_root = '/content/Parallel_Dense_Video_Captioning_Custom/visualization/videos'
-vid_file_lst = ['/content/Parallel_Dense_Video_Captioning_Custom/visualization/videos/trial.txt']
+pwd=os.getcwd()
+dataset_root = pwd
+vid_file_lst = [f'{pwd}/trial.txt']
 split_lst = ['training', 'validation', 'testing']
 if not os.path.isdir(dataset_root):
     os.mkdir(dataset_root)
