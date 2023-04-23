@@ -8,7 +8,7 @@ def get_text(vid_id):
 def get_transcipts(final_frames):
     transcripts={}
     for key,value in final_frames.items():
-        transcripts[key]=get_text[key]
+        transcripts[key]=get_text(key)
     
     return transcripts
 
@@ -35,7 +35,7 @@ def transcripts_to_captions(final_frame,transcript,time_array):
         idx=find_index(time_array,time_step,True)
         if idx!=-1 and lasts!=transcript[idx]['text']:
             caption=caption+transcript[idx]['text']+"."
-            lasts=time_array[idx]['text']
+            lasts=transcript[idx]['text']
         idx=find_index(time_array,time_step,False)
         if idx!=-1 and laste!=transcript[idx]['text']:
             caption=caption+transcript[idx]['text']+"."
