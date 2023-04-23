@@ -13,7 +13,7 @@ def get_meteor_score(data, bard_captions):
   for key in bard_captions:
     input_captions = ""
     k=f'v_{key}'
-    for i in data[key]['sentences']:
+    for i in data[k]['sentences']:
       input_captions = input_captions + i+'. '
     output[key] = meteor([word_tokenize(input_captions)],word_tokenize(bard_captions[key]))
   return output
@@ -23,7 +23,7 @@ def get_bleu_score(data, bard_captions):
   for key in bard_captions:
     input_captions = ""
     k=f'v_{key}'
-    for i in data[key]['sentences']:
+    for i in data[k]['sentences']:
       input_captions = input_captions + i+'. '
     output[key] = sentence_bleu([word_tokenize(input_captions)],word_tokenize(bard_captions[key]))
   return output
@@ -33,7 +33,7 @@ def get_bert_score(data, bard_captions):
   for key in bard_captions:
     input_captions = ""
     k=f'v_{key}'
-    for i in data[key]['sentences']:
+    for i in data[k]['sentences']:
       input_captions = input_captions + i+'. '
     output[key] =bertscore.compute(predictions=[bard_captions[key]], references=[input_captions], lang="en")
   return output
