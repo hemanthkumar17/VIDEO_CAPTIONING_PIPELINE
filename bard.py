@@ -1,6 +1,6 @@
 from Bard import Chatbot
 # token = "VAhopPDCHWYe9Xi1QJxKeZiCew4H1hBup3Ggrpj3W4ZHlgCnyAmvNo9-k9ZLb6uuw1E7xw."
-token="VwjL60dIWDs_fltyTNBNwqLkmPs7vj8aidDCQpUpltB2KiJhPotNgN1pawVp25YEH7CXvQ."
+token="VwhopIEQJIXOELZV9NOe3PO6YW3LEMIFQKS6s2Jppme1wxFc3X2e2dpIzcrbAjq0d6_7ew."
 chatbot = Chatbot(token)
 
 def get_captions_from_bard(captions):
