@@ -10,7 +10,7 @@ def get_model(config,device):
   return processor, model
 
 def image_caption(processor, model, image_folder,image_path,device):
-  raw_image = cv2.imread(image_folder+"-opencv/"+ image_path)
+  raw_image = Image.open(image_folder+"-opencv/"+ image_path)
   inputs = processor(raw_image, return_tensors="pt").to(device)
   out = model.generate(**inputs)
   return processor.decode(out[0], skip_special_tokens=True)

@@ -41,5 +41,5 @@ def yolo_box(image_folder,img_path):
       #     f"Detected {model.config.id2label[label.item()]} with confidence "
       #     f"{round(score.item(), 3)} at location {box}"
       # )
-  image=cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-  cv2.imwrite(os.path.join(f'{image_folder}-opencv', f"{img_path}"), np.asarray(image,dtype=np.float32))  
+  image=cv2.cvtColor(np.asarray(image,dtype=np.float32), cv2.COLOR_RGB2BGR)
+  cv2.imwrite(os.path.join(f'{image_folder}-opencv', f"{img_path}"), image)
